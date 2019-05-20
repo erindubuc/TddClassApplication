@@ -11,9 +11,11 @@ namespace TDDGrid
         public static void Main(string[] args)
         {
             GameBoard game = new GameBoard();
-            game.SetInitialBoardState();
+            game.SetAllBoardCoordinatesAndStateAsFalse();
             game.DrawBoard();
             //game.DisplayBoard();
+
+            game.DisplayCoordintatesAndState();
             Console.ReadLine();
         }
     }

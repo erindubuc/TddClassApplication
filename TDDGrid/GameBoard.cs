@@ -6,9 +6,30 @@ using System.Threading.Tasks;
 
 namespace TDDGrid
 {
-    public class GameBoard
+    public class GameBoard : Coordinates
     {
-        public char[,] boardState = new char[5, 5];
+        public bool[,] boardState = new bool[8, 8];
+        public Dictionary<Coordinates, bool> boardCoords = new Dictionary<Coordinates, bool>();
+
+
+        public Dictionary<Coordinates, bool> SetAllBoardCoordinatesAndStateAsFalse()
+        {
+            for (int row = 0; row < boardState.GetLength(1); row++)
+            {
+                for (int col = 0; col < boardState.GetLength(0); col++)
+                {
+                    var coords = new Coordinates(row, col);
+                    boardState[row, col] = coords.State;
+                    boardCoords.Add(coords, coords.State);
+                }
+            }
+            return boardCoords;
+        }
+
+        public bool GetStateOfParticularCellCoordinates(Coordinates coords)
+        {
+            return coords.State;
+        }
 
         public void DrawBoard()
         {
@@ -27,23 +48,27 @@ namespace TDDGrid
             }
         }
 
-        public void SetInitialBoardState()
+
+        public bool TurnStateOfCellToTrue(Coordinates coords)
         {
-            for (int row = 0; row < boardState.GetLength(1); row++)
+            // add if statement for if it is already true
+            return coords.State = true;
+        }
+
+        public bool SwitchAllTrueStatesToFalseStates(Coordinates coords)
+        {
+            return coords.State = false;
+        }
+        
+        public void DisplayCoordintatesAndState()
+        {
+            foreach (var item in boardCoords)
             {
-                for (int col = 0; col < boardState.GetLength(0); col++)
-                {
-                    boardState[row, col] = 'x';
-                }
+                Console.WriteLine("[{0}, {1}] : {2}", item.Key.Row, item.Key.Column, item.Value);
             }
         }
 
-
-        public char InsertCharIntoChosenCell(int row, int col)
-        {
-            return (boardState[row,col] = 'x');
-        }
-
+        /*
         public void DisplayBoard()
         {
             for (int row = 0; row < boardState.GetLength(1); row++)
@@ -54,5 +79,7 @@ namespace TDDGrid
                 }
             }
         }
+        */
+
     }
 }
