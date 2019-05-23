@@ -31,6 +31,17 @@ namespace TDDGrid
             return coords.State;
         }
 
+        public bool TurnStateOfCellToTrue(Coordinates coords)
+        {
+            // add if statement for if it is already true
+            return coords.State = true;
+        }
+
+        public bool SwitchAllTrueStatesToFalseStates(Coordinates coords)
+        {
+            return coords.State = false;
+        }
+
         public void DrawBoard()
         {
             for (int row = 0; row < boardState.GetLength(1); row++)
@@ -49,16 +60,6 @@ namespace TDDGrid
         }
 
 
-        public bool TurnStateOfCellToTrue(Coordinates coords)
-        {
-            // add if statement for if it is already true
-            return coords.State = true;
-        }
-
-        public bool SwitchAllTrueStatesToFalseStates(Coordinates coords)
-        {
-            return coords.State = false;
-        }
         
         public void DisplayCoordintatesAndState()
         {
