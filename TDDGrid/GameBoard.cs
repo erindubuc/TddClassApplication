@@ -6,66 +6,54 @@ using System.Threading.Tasks;
 
 namespace TDDGrid
 {
-    public class GameBoard : Coordinates
+    public class GameBoard 
     {
-        public bool[,] boardState = new bool[8, 8];
-        public Dictionary<Coordinates, bool> boardCoords = new Dictionary<Coordinates, bool>();
+        private const int Rows = 10;
+        private const int Columns = 10;
+        public bool[,] boardState = new bool[Rows,Columns];
+        public bool isCellChecked = false;
 
-
-        public Dictionary<Coordinates, bool> SetAllBoardCoordinatesAndStateAsFalse()
+        public GameBoard()
         {
-            for (int row = 0; row < boardState.GetLength(1); row++)
+            for (int row = 0; row < Rows; row++)
             {
-                for (int col = 0; col < boardState.GetLength(0); col++)
+                for (int col = 0; col < Columns; col++)
                 {
-                    var coords = new Coordinates(row, col);
-                    boardState[row, col] = coords.State;
-                    boardCoords.Add(coords, coords.State);
+                    boardState[row, col] = isCellChecked;
+
                 }
             }
-            return boardCoords;
         }
 
-        public bool GetStateOfParticularCellCoordinates(Coordinates coords)
+        public bool GetStateOfSpecificCell(int row, int col)
         {
-            return coords.State;
+            return boardState[row,col];
         }
 
-        public bool TurnStateOfCellToTrue(Coordinates coords)
+        public bool SwitchStateOfCell(int row, int col)
         {
-            // add if statement for if it is already true
-            return coords.State = true;
+            if (boardState[row, col] == isCellChecked)
+                return isCellChecked = true;
+            else
+                return isCellChecked;
         }
 
-        public bool SwitchAllTrueStatesToFalseStates(Coordinates coords)
-        {
-            return coords.State = false;
-        }
+       
 
         public void DrawBoard()
         {
-            for (int row = 0; row < boardState.GetLength(1); row++)
+            for (int row = 0; row < Rows; row++)
             {
                 string row1 = "| ";
                 string row2 = "";
 
-                for (int col = 0; col < boardState.GetLength(0); col++)
+                for (int col = 0; col < Columns; col++)
                 {
                     row1 = row1 + boardState[row, col] + " | ";
                     row2 += "+---";
                 }
                 Console.WriteLine(row1);
                 Console.WriteLine(row2 + "+");
-            }
-        }
-
-
-        
-        public void DisplayCoordintatesAndState()
-        {
-            foreach (var item in boardCoords)
-            {
-                Console.WriteLine("[{0}, {1}] : {2}", item.Key.Row, item.Key.Column, item.Value);
             }
         }
 

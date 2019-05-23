@@ -11,7 +11,6 @@ namespace TDDGrid.UnitTests
     public class TDDGridTests
     {
         private GameBoard _gameBoard;
-        private Coordinates _coords;
         public int row;
         public int col;
 
@@ -19,65 +18,43 @@ namespace TDDGrid.UnitTests
         public void TestFixtureSetup()
         {
             _gameBoard = new GameBoard();
-            //_coords = new Coordinates();
-            //_gameBoard.SetInitialBoardState();
+            //_gameBoard.SetAllBoardCellStatesToFalse();
         }
 
         [Test]
-        public void EnterOneRowAndCol_ReturnStateOfCoordinateObject()
+        public void EnterRowAndCol_ReturnStateOfCell()
         {
-            _coords = new Coordinates(1, 5);
+            row = 2;
+            col = 4;
             var expected = false;
-            var actual = _gameBoard.GetStateOfParticularCellCoordinates(_coords);
+            var actual = _gameBoard.GetStateOfSpecificCell(row, col);
 
             Assert.AreEqual(expected, actual);
-        }
-
-        [Test]
-        public void ChooseOneCellAndReturnStateAsTrue()
-        {
-            _coords = new Coordinates(4, 7);
-            var expected = true;
-            var actual = _gameBoard.TurnStateOfCellToTrue(_coords);
-
-            Assert.AreEqual(expected, actual);
-        }
-
-        [Test]
-        public void IfStateOfCellCoordsIsTrue_SwitchToFalse()
-        {
-            _coords = new Coordinates(2, 5);
-            _coords.State = true;
-            var expected = false;
-            var actual = _gameBoard.SwitchAllTrueStatesToFalseStates(_coords);
-
-            Assert.AreEqual(expected, actual);
-        }
-
- 
-        /*
-        [Test]
-        public void GetDictionaryOfCoordinates()
-        {
-            var expected = _gameBoard.SetAllBoardCoordinatesAndStateAsFalse();
-            var actual = 
-        }
-
-        /*
-        [Test]
-        public void ChooseSetOfCoords_ReturnStateAsTrue()
-        {
-           
         }
         
-       
-
-        public void ChooseACellAndReturnCoordinates()
+        [Test]
+        public void IfStateOfCellIsFalse_SwitchToTrue()
         {
-            int row = 1;
-            int col = 2;
+            row = 2;
+            col = 4;
+            var expected = true;
+            var actual = _gameBoard.SwitchStateOfCell(row, col);
 
+            Assert.AreEqual(expected, actual);
         }
-        */
+
+        
+        [Test]
+        public void IfStateOfCellIsTrue_SwitchToFalse()
+        {
+            row = 5;
+            col = 7;
+            _gameBoard.boardState[row, col] = true;
+
+            var expected = false;
+            var actual = _gameBoard.SwitchStateOfCell(row, col);
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
