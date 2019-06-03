@@ -13,7 +13,8 @@ namespace TDDGrid
         public bool[,] boardState = new bool[Rows,Columns];
         public bool isCellChecked = false;
         public int neighborCount = 0;
-        //public List<int> activeCells = new List<int>(); 
+        private int _lastColumn = Columns - 1;
+        private int _lastRow = Rows - 1;
 
         public GameBoard()
         {
@@ -27,7 +28,7 @@ namespace TDDGrid
             }
         }
 
-        public bool GetStateOfSpecificCell(int row, int col)
+        public bool GetStateOfCell(int row, int col)
         {
             return boardState[row,col];
         }
@@ -41,117 +42,116 @@ namespace TDDGrid
             return boardState[row, col];
         }
 
-        public int CountAllHorizontalNeighborsOfActiveCell(int row, int col)
+        public int CountHorizontalNeighborsOfCell(int row, int col)
         {
             int horizontalNeighborCount = 0;
-            if (boardState[row, col] == true)
+            
+            if (col == 0)
             {
-                if (col == 0)
-                {
-                    // horz
-                    if (boardState[row, col + 1] == true)
-                        horizontalNeighborCount++;
-                }
-                else if(col == GameBoard.Columns - 1)
-                {
-                    // horz
-                    if (boardState[row, col - 1] == true)
-                        horizontalNeighborCount++;
-                }
-                else
-                {
-                    // horz
-                    if (boardState[row, col - 1] == true)
-                        horizontalNeighborCount++;
-                    if (boardState[row, col + 1] == true)
-                        horizontalNeighborCount++;
-                }
+                if (boardState[row, col + 1] == true)
+                    horizontalNeighborCount++;
             }
+            else if(col == _lastColumn)
+            {
+                if (boardState[row, col - 1] == true)
+                    horizontalNeighborCount++;
+            }
+            else
+            {
+                if (boardState[row, col - 1] == true)
+                    horizontalNeighborCount++;
+                if (boardState[row, col + 1] == true)
+                    horizontalNeighborCount++;
+            }
+            
             return horizontalNeighborCount;
         }
 
-        public int CountAllVerticalNeighborsOfActiveCell(int row, int col)
+        public int CountVerticalNeighborsOfCell(int row, int col)
         {
             int verticalNeighborCount = 0;
-            if (boardState[row, col] == true)
+            
+            if (row == 0)
             {
-                if (row == 0)
-                {
-                    if (boardState[row + 1, col] == true)
-                        neighborCount++;
-                }
-                else if (row == GameBoard.Rows - 1)
-                {
-                    if (boardState[row - 1, col] == true)
-                        verticalNeighborCount++;
-                }
-                else
-                {
-                    // vert
-                    if (boardState[row - 1, col] == true)
-                        verticalNeighborCount++;
-                    if (boardState[row + 1, col] == true)
-                        verticalNeighborCount++;
-
-                }
+                if (boardState[row + 1, col] == true)
+                    verticalNeighborCount++;
             }
+            else if (row == _lastRow)
+            {
+                if (boardState[row - 1, col] == true)
+                    verticalNeighborCount++;
+            }
+            else
+            {
+                if (boardState[row - 1, col] == true)
+                    verticalNeighborCount++;
+                if (boardState[row + 1, col] == true)
+                    verticalNeighborCount++;
+            }
+            
             return verticalNeighborCount;
         }
 
-        public int CountAllDiagonalNeighborsOfActiveCell(int row, int col)
+        public int CountDiagonalNeighborsOfCell(int row, int col)
         {
             int diagonalNeighborCount = 0;
-            if (boardState[row, col] == true)
+            int lastColumn = _lastColumn;
+            int lastRow = _lastRow;
+            
+            if (col == 0)
             {
-                if (col == 0)
+                if (row == 0)
                 {
-                    if (row == 0)
-                    {
-                        if (boardState[row + 1, col + 1] == true)
-                            diagonalNeighborCount++;
-                    }
-
-                    if (row == GameBoard.Rows - 1)
-                    {
-                        if (boardState[row - 1, col + 1] == true)
-                            diagonalNeighborCount++;
-                    }
-
                     if (boardState[row + 1, col + 1] == true)
                         diagonalNeighborCount++;
-
+                }
+                else if (row == _lastRow)
+                {
                     if (boardState[row - 1, col + 1] == true)
                         diagonalNeighborCount++;
-
                 }
-                else if (col == GameBoard.Columns - 1)
+                else
                 {
-                    if (row == 0)
-                    {
-                        if (boardState[row + 1, col - 1] == true)
-                            diagonalNeighborCount++;
-                    }
-                    if (row == GameBoard.Rows - 1)
-                    {
-                        if (boardState[row - 1, col - 1] == true)
-                            diagonalNeighborCount++;
-                    }
-
-                    if (boardState[row + 1, col - 1] == true)
+                    if (boardState[row - 1, col + 1] == true)
                         diagonalNeighborCount++;
-
+                    if (boardState[row + 1, col + 1] == true)
+                        diagonalNeighborCount++;
+                }
+            }
+            else if (col == _lastColumn)
+            {
+                if (row == 0)
+                {
+                    if (boardState[row + 1, col - 1])
+                        diagonalNeighborCount++;
+                }
+                else if (row == _lastRow)
+                {
                     if (boardState[row - 1, col - 1] == true)
                         diagonalNeighborCount++;
                 }
-                /*
-                else if (row == 0)
+                else
                 {
-                    if ()
+                    if (boardState[row - 1, col - 1] == true)
+                        diagonalNeighborCount++;
+                    if (boardState[row + 1, col - 1] == true)
+                        diagonalNeighborCount++;
                 }
-                else if (row == GameBoard.Rows - 1)
-                {
-                }
-                */
+            }
+            else if (row == 0)
+            {
+
+                if (boardState[row + 1, col + 1] == true)
+                    diagonalNeighborCount++;
+                if (boardState[row + 1, col - 1] == true)
+                    diagonalNeighborCount++;
+            }
+            else if (row == _lastRow)
+            {
+                if (boardState[row - 1, col - 1] == true)
+                    diagonalNeighborCount++;
+                if (boardState[row - 1, col + 1] == true)
+                    diagonalNeighborCount++;
             }
             else
             {
@@ -169,92 +169,70 @@ namespace TDDGrid
 
             return diagonalNeighborCount;
         }
-        public int CountActiveNeighborsOfActiveCell(int row, int col)
-        {
-            int neighborCount = 0;
-            if (boardState[row, col] == true)
+
+            public int CountActiveNeighborsOfCell(int row, int col)
             {
-                if (col == 0)
-                {
-                    // vert
-                    if (boardState[row - 1, col] == true)
-                        neighborCount++;
-                    if (boardState[row + 1, col] == true)
-                        neighborCount++;
-                    // horz
-                    if (boardState[row, col + 1] == true)
-                        neighborCount++;
-                    // diag left
-                    if (boardState[row + 1, col + 1] == true)
-                        neighborCount++;
-                    // diag right
-                    if (boardState[row - 1, col + 1] == true)
-                        neighborCount++;
+                int vertical = CountVerticalNeighborsOfCell(row, col);
+                int horizontal = CountHorizontalNeighborsOfCell(row, col);
+                int diagonal = CountDiagonalNeighborsOfCell(row, col);
 
+                neighborCount = vertical + horizontal + diagonal;
 
-
-
-                }
-                else
-                {
-                    // vert
-                    if (boardState[row - 1, col] == true)
-                        neighborCount++;
-                    if (boardState[row + 1, col] == true)
-                        neighborCount++;
-                    // horz
-                    if (boardState[row, col - 1] == true)
-                        neighborCount++;
-                    if (boardState[row, col + 1] == true)
-                        neighborCount++;
-                    // diag left
-                    if (boardState[row - 1, col - 1] == true)
-                        neighborCount++;
-                    if (boardState[row + 1, col + 1] == true)
-                        neighborCount++;
-                    // diag right
-                    if (boardState[row - 1, col + 1] == true)
-                        neighborCount++;
-                    if (boardState[row + 1, col - 1] == true)
-                        neighborCount++;
-                }
-                
+                return neighborCount;
             }
-            return neighborCount;
-        }
-        /*
-        public List<int> GetAllActiveCellsInBoard()
-        {
-            for (int row = 0; row < GameBoard.Rows; row++)
+
+            public bool DetermineNextStateOfCell(int row, int col)
             {
-                for (int col = 0; col < GameBoard.Columns; col++)
+                int neighbors = CountActiveNeighborsOfCell(row, col);
+
+                if (boardState[row, col] == true)
                 {
-                    if (GetStateOfSpecificCell(row,col) == true)
+                    // each cell with one or no neighbors dies, as if by solitude.
+                    if (neighbors <= 1)
                     {
-                        activeCells.Add(row);
-                        activeCells.Add(col);
+                        if (boardState[row, col] == true)
+                            SwitchStateOfCell(row, col);
+                    }
+
+                    // each cell with four or more neighbors dies, as if by overpopulation.
+                    if (neighbors >= 4)
+                    {
+                        if (boardState[row, col] == true)
+                            SwitchStateOfCell(row, col);
+                    }
+
+                    // each cell with two or three neighbors survives.
+                    if (neighbors == 2 || neighbors == 3)
+                    {
+                        if (boardState[row, col] == false)
+                            SwitchStateOfCell(row, col);
                     }
                 }
-            }
-            return activeCells;
-        }
-        */
-        public void DrawBoard()
-        {
-            for (int row = 0; row < Rows; row++)
-            {
-                string row1 = "| ";
-                string row2 = "";
-
-                for (int col = 0; col < Columns; col++)
+                else if (boardState[row, col] == false)
                 {
-                    row1 = row1 + boardState[row, col] + " | ";
-                    row2 += "+---";
+                    if (neighbors == 3)
+                        SwitchStateOfCell(row, col);
                 }
-                Console.WriteLine(row1);
-                Console.WriteLine(row2 + "+");
+
+                return GetStateOfCell(row, col);
             }
-        }
+
+            public void DrawBoard()
+            {
+                for (int row = 0; row < Rows; row++)
+                {
+                    string row1 = "| ";
+                    string row2 = "";
+
+                    for (int col = 0; col < Columns; col++)
+                    {
+                        row1 = row1 + boardState[row, col] + " | ";
+                        row2 += "+---";
+                    }
+                    Console.WriteLine(row1);
+                    Console.WriteLine(row2 + "+");
+                }
+            }
 
         /*
         public void DisplayBoard()
