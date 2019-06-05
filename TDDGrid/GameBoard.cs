@@ -15,6 +15,8 @@ namespace TDDGrid
         public int neighborCount = 0;
         private int _lastColumn = Columns - 1;
         private int _lastRow = Rows - 1;
+        private string falseColor = "gray";
+        private string trueColor = "yellow";
 
         public GameBoard()
         {
@@ -40,6 +42,17 @@ namespace TDDGrid
             else
                 boardState[row,col] = isCellChecked;
             return boardState[row, col];
+        }
+
+        public string GetColorOfCell(int row, int col)
+        {
+            string color = "";
+            if (GetStateOfCell(row, col) == false)
+                color = falseColor;
+            else
+                color = trueColor;
+
+            return color;
         }
 
         public int CountHorizontalNeighborsOfCell(int row, int col)

@@ -262,6 +262,22 @@ namespace TDDGrid.UnitTests
             Assert.AreEqual(expected, actual);
         }
 
+        [Test]
+        public void IfCellIsFalse_ColorIsGray_ReturnGray()
+        {
+            string expected = "gray";
+
+            Assert.AreEqual(expected, _gameBoard.GetColorOfCell(4, 5));
+        }
+
+        [Test]
+        public void IfCellIsTrue_ColorIsYellow_ReturnYellow()
+        {
+            string expected = "yellow";
+            _gameBoard.SwitchStateOfCell(4, 5);
+            Assert.AreEqual(expected, _gameBoard.GetColorOfCell(4, 5));
+        }
+
         //[Test]
         //public void CheckBoardForActiveCells_ReturnListOfActiveCells()
         //{
