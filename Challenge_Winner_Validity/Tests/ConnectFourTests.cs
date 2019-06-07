@@ -106,6 +106,78 @@ namespace Challenge_Winner_Validity.Tests
             Assert.AreEqual(expected, actual);
         }
 
+        [Test]
+        public void ReturnTrueIfFourXInARowDiagonally_LowerLeftToUpperRight()
+        {
+            State[,] input = new State[,] {
+                { State.blank, player1, player1, player2, State.blank, State.blank, State.blank },
+                { State.blank, State.blank, State.blank, player2, player1, State.blank, State.blank },
+                { State.blank, player1, State.blank, player1, State.blank, State.blank, State.blank },
+                { State.blank, player1, player1, player2, player2, player2, player2 },
+                { State.blank, player1, State.blank, State.blank, State.blank, State.blank, State.blank },
+                { State.blank, player2, State.blank, State.blank, State.blank, State.blank, State.blank }
+            };
+
+            bool actual = Board.CheckForDiagonalWinner(input);
+            bool expected = true;
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void ReturnTrueIfFourXInARowDiagonally_UpperLeftToLowerRight()
+        {
+            State[,] input = new State[,] {
+                { State.blank, player1, player1, player2, State.blank, State.blank, State.blank },
+                { State.blank, State.blank, State.blank, player1, player1, State.blank, State.blank },
+                { State.blank, player1, State.blank, State.blank, player1, State.blank, State.blank },
+                { State.blank, player1, player1, player2, player2, player1, player2 },
+                { State.blank, player1, State.blank, State.blank, State.blank, State.blank, State.blank },
+                { State.blank, player2, State.blank, State.blank, State.blank, State.blank, State.blank }
+            };
+
+            bool actual = Board.CheckForDiagonalWinner(input);
+            bool expected = true;
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void ReturnTrueIfFourOInARowDiagonally_LowerLeftToUpperRight()
+        {
+            State[,] input = new State[,] {
+                { State.blank, player1, player1, player2, State.blank, State.blank, State.blank },
+                { State.blank, State.blank, State.blank, player2, player1, State.blank, State.blank },
+                { State.blank, player1, State.blank, player1, player2, State.blank, State.blank },
+                { State.blank, player1, player1, player2, player2, State.blank, player2 },
+                { State.blank, player1, player2, State.blank, State.blank, State.blank, State.blank },
+                { State.blank, player2, State.blank, State.blank, State.blank, State.blank, State.blank }
+            };
+
+            bool actual = Board.CheckForDiagonalWinner(input);
+            bool expected = true;
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void ReturnTrueIfFourOInARowDiagonally_UpperLeftToLowerRight()
+        {
+            State[,] input = new State[,] {
+                { player1, player1, player1, player2, State.blank, State.blank, State.blank },
+                { State.blank, player2, State.blank, player1, player1, State.blank, State.blank },
+                { State.blank, player1, player2, State.blank, player1, State.blank, State.blank },
+                { State.blank, player1, player1, player2, player2, player1, player2 },
+                { State.blank, player1, State.blank, State.blank, player2, State.blank, State.blank },
+                { State.blank, player2, State.blank, State.blank, State.blank, State.blank, State.blank }
+            };
+
+            bool actual = Board.CheckForDiagonalWinner(input);
+            bool expected = true;
+
+            Assert.AreEqual(expected, actual);
+        }
+
     }
 }
     

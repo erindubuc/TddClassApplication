@@ -18,7 +18,7 @@ namespace Challenge_Winner_Validity.Models
                     board[row, col] = State.blank;
                 }
             }
-            
+
         }
 
         public enum State
@@ -37,7 +37,7 @@ namespace Challenge_Winner_Validity.Models
             {
                 for (int col = 0; col < board.GetLength(1); col++)
                 {
-                    if (board[row, col] == State.X) 
+                    if (board[row, col] == State.X)
                         xCounter++;
 
                     if (board[row, col] == State.O)
@@ -62,7 +62,7 @@ namespace Challenge_Winner_Validity.Models
                     {
                         return true;
                     }
-                 
+
                 }
             }
 
@@ -78,7 +78,7 @@ namespace Challenge_Winner_Validity.Models
             {
                 for (int col = 0; col < board.GetLength(1); col++)
                 {
-                    
+
                     if (board[row, col] == State.X && board[row + 1, col] == State.X)
                     {
                         xCounter++;
@@ -114,6 +114,86 @@ namespace Challenge_Winner_Validity.Models
             }
             return false;
         }
-       
+
+        public static bool CheckForDiagonalWinner(State[,] board)
+        {
+            int xCounter = 0;
+            int oCounter = 0;
+
+            for (int row = 0; row < board.GetLength(0); row++)
+            {
+                for (int col = 0; col < board.GetLength(1); col++)
+                {
+                    if (board[row, col] == State.X && board[row + 1, col - 1] == State.X)
+                    {
+                        xCounter++;
+                        int nextRow = 1;
+                        int nextCol = 1;
+                        while (board[row + nextRow, col - nextCol] == State.X)
+                        {
+                            xCounter++;
+                            nextRow++;
+                            nextCol++;
+
+                            if (xCounter == 4)
+                                return true;
+                        }
+                        xCounter = 0;
+                    }
+
+                    if (board[row, col] == State.X && board[row + 1, col + 1] == State.X)
+                    {
+                        xCounter++;
+                        int nextRow = 1;
+                        int nextCol = 1;
+                        while (board[row + nextRow, col + nextCol] == State.X)
+                        {
+                            xCounter++;
+                            nextRow++;
+                            nextCol++;
+
+                            if (xCounter == 4)
+                                return true;
+                        }
+                        xCounter = 0;
+                    }
+
+                    if (board[row, col] == State.O && board[row + 1, col - 1] == State.O)
+                    {
+                        oCounter++;
+                        int nextRow = 1;
+                        int nextCol = 1;
+                        while (board[row + nextRow, col - nextCol] == State.O)
+                        {
+                            oCounter++;
+                            nextRow++;
+                            nextCol++;
+
+                            if (oCounter == 4)
+                                return true;
+                        }
+                        oCounter = 0;
+                    }
+
+                    if (board[row, col] == State.O && board[row + 1, col + 1] == State.O)
+                    {
+                        oCounter++;
+                        int nextRow = 1;
+                        int nextCol = 1;
+                        while (board[row + nextRow, col + nextCol] == State.O)
+                        {
+                            oCounter++;
+                            nextRow++;
+                            nextCol++;
+
+                            if (oCounter == 4)
+                                return true;
+                        }
+                        oCounter = 0;
+                    }
+                }
+            }
+            return false;
+        }
     }
 }
