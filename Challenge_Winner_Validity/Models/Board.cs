@@ -195,5 +195,30 @@ namespace Challenge_Winner_Validity.Models
             }
             return false;
         }
+        /*
+        for (int row = 5; row >= 0; row--)
+            {
+                for (int column = 6; column >= 0; column--)
+                {
+                    State currentCell = board[row, column];
+                    if (currentCell == State.X || currentCell == State.O)
+                    {
+                        if (column >= 3 && currentCell == board[row, column - 1] && currentCell == board[row, column - 2] && currentCell == board[row, column - 3])
+                            return true;
+
+                        if (row >= 3 && currentCell == board[row - 1, column] && currentCell == board[row - 2, column] && currentCell == board[row - 3, column])
+                            return true;
+
+                        if (column >= 3 && row >= 3 && currentCell == board[row - 1, column - 1] && currentCell == board[row - 2, column - 2] && currentCell == board[row - 3, column - 3])
+                            return true;
+
+                        if (column <= 3 && row >= 3 && currentCell == board[row - 1, column + 1] && currentCell == board[row - 2, column + 2] && currentCell == board[row - 3, column + 3])
+                            return true;
+                    }
+                }
+            }
+            return false;
+        
+    */
     }
 }
