@@ -28,7 +28,7 @@ namespace Challenge_Winner_Validity.Tests
                 { State.blank, State.blank, State.blank, State.blank, State.blank, State.blank, State.blank },
                 { State.blank, State.blank, State.blank, State.blank, State.blank, State.blank, State.blank }
             };
-            bool actual = Board.CheckForHorizontalWinner(input);
+            bool actual = Board.CheckForWinner(input);
             bool expected = false;
             
             Assert.AreEqual(expected, actual);
@@ -46,7 +46,7 @@ namespace Challenge_Winner_Validity.Tests
                 { State.blank, State.blank, State.blank, State.blank, State.blank, State.blank, State.blank }
             };
 
-            bool actual = Board.CheckForHorizontalWinner(input);
+            bool actual = Board.CheckForWinner(input);
             bool expected = true;
 
             Assert.AreEqual(expected, actual);
@@ -64,7 +64,7 @@ namespace Challenge_Winner_Validity.Tests
                 { State.blank, State.blank, State.blank, State.blank, State.blank, State.blank, State.blank }
             };
 
-            bool actual = Board.CheckForHorizontalWinner(input);
+            bool actual = Board.CheckForWinner(input);
             bool expected = true;
 
             Assert.AreEqual(expected, actual);
@@ -82,7 +82,7 @@ namespace Challenge_Winner_Validity.Tests
                 { State.blank, player1, State.blank, State.blank, State.blank, State.blank, State.blank }
             };
 
-            bool actual = Board.CheckForVerticalWinner(input);
+            bool actual = Board.CheckForWinner(input);
             bool expected = true;
 
             Assert.AreEqual(expected, actual);
@@ -100,7 +100,7 @@ namespace Challenge_Winner_Validity.Tests
                 { State.blank, player2, State.blank, State.blank, State.blank, State.blank, State.blank }
             };
 
-            bool actual = Board.CheckForVerticalWinner(input);
+            bool actual = Board.CheckForWinner(input);
             bool expected = true;
 
             Assert.AreEqual(expected, actual);
@@ -118,7 +118,7 @@ namespace Challenge_Winner_Validity.Tests
                 { State.blank, player2, State.blank, State.blank, State.blank, State.blank, State.blank }
             };
 
-            bool actual = Board.CheckForDiagonalWinner(input);
+            bool actual = Board.CheckForWinner(input);
             bool expected = true;
 
             Assert.AreEqual(expected, actual);
@@ -136,7 +136,7 @@ namespace Challenge_Winner_Validity.Tests
                 { State.blank, player2, State.blank, State.blank, State.blank, State.blank, State.blank }
             };
 
-            bool actual = Board.CheckForDiagonalWinner(input);
+            bool actual = Board.CheckForWinner(input);
             bool expected = true;
 
             Assert.AreEqual(expected, actual);
@@ -154,7 +154,7 @@ namespace Challenge_Winner_Validity.Tests
                 { State.blank, player2, State.blank, State.blank, State.blank, State.blank, State.blank }
             };
 
-            bool actual = Board.CheckForDiagonalWinner(input);
+            bool actual = Board.CheckForWinner(input);
             bool expected = true;
 
             Assert.AreEqual(expected, actual);
@@ -172,7 +172,7 @@ namespace Challenge_Winner_Validity.Tests
                 { State.blank, player2, State.blank, State.blank, State.blank, State.blank, State.blank }
             };
 
-            bool actual = Board.CheckForDiagonalWinner(input);
+            bool actual = Board.CheckForWinner(input);
             bool expected = true;
 
             Assert.AreEqual(expected, actual);
